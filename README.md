@@ -27,130 +27,53 @@ npm test
  * EIS 13 / DPT 4.xxx
  * EIS 14 / DPT 6.xxx
  * EIS 15 / DPT 16.xxx
+ * DPT232
 
 ## CLI Usage
+
+View source code of cli tools as examples for usage.
 
 ### groupwrite
   
 ./bin/groupwrite host port x/x/x 0..255
 
+e.g. `./bin/groupwrite localhost 6270 1/2/3 100`
+
+./bin/groupwrite --socket path x/x/x 0..255
+
+e.g. `./bin/groupwrite --socket /run/knx 1/2/3 100`
+
 ### groupswrite
   
 ./bin/groupswrite host port x/x/x 0..1
 
+e.g. `./bin/groupswrite localhost 6270 1/2/4 1`
+
+./bin/groupswrite --socket path x/x/x 0..1
+
+e.g. `./bin/grouspwrite --socket /run/knx 1/2/4 1`
+
 ### groupread
+(issues a read request telegram to the bus, does not wait for an answer!)
 
 ./bin/groupread host port x/x/x
+
+e.g. `./bin/groupread localhost 6270 1/2/4`
+
+./bin/groupread --socket path x/x/x
+
+e.g. `./bin/groupread --socket /run/knx 1/2/4`
 
 ### Listening for group telegrams
 
 ./bin/groupsocketlisten host port
 
-## API
+./bin/groupsocketlisten --socket path
 
-### Connection.socketRemote(opts, callback)
-
-Opens a connection eibd over TCP/IP. 
-
-```javascript
-var opts = {
-  host: 'localhost',
-  port: 6720
-};
-
-eibd.socketRemote(opts, function() {
-  // connected
-});
-```
-
-### Connection.openGroupSocket(writeOnly, callback)
-
-Opens a Group communication interface
-
-```javascript
-eibd.on('data', function(action, src, dest, val) {
-  // do something
-});
-
-eibd.openGroupSocket(0);
-```
-
-### Connection.openTGroup(dest, writeOnly, callback)
-
-Opens a connection of type T_Group
-
-```javascript
-var dest = eibd.str2addr('x/x/x');
-eibd.openTGroup(dest, 1, function(err) {
-
-});
-```
-
-### Connection.sendAPDU(data, callback)
-
-Sends an APDU
-
-### Connection.sendRequest(data, callback)
-
-Sends TCP/IP request to eib-daemon
-
-### Parser.parseTelegram(telegram)
-
-Parse telegram and emits 'write', 'response' or 'read' events.
-
-### Parser.parseValue(len, telegram)
-
-Try to parse values with assumptions about package len.
-
-### Parse.encodeEIS5(buffer)
-
-Parse value to EIS 5 / DPT 9.xxx from buffer
-
-### str2addr(str);
-
-Encodes string to knx address
-
-### addr2str(adr, gad=true/false);
-
-Decodes knx address to string
-
-## Example
-```javascript
-var eibd = require('eibd');
-/**
- * groupsocketlisten
- */
-function groupsocketlisten(opts, callback) {
-
-  var conn = eibd.Connection();
-
-  conn.socketRemote(opts, function() {
-    
-    conn.openGroupSocket(0, callback);
-
-  });
-
-}
-
-var host = 'localhost';
-var port = 6720;
-
-groupsocketlisten({ host: host, port: port }, function(parser) {
-
-  parser.on('write', function(src, dest, dpt, val){
-    console.log('Write from '+src+' to '+dest+': '+val);
-  });
-
-  parser.on('response', function(src, dest, val) {
-    console.log('Response from '+src+' to '+dest+': '+val);
-  });
-  
-  parser.on('read', function(src, dest) {
-    console.log('Read from '+src+' to '+dest);
-  });
-
-});
-```
+## Related projects
+ * https://github.com/knxd/knxd
+ * https://github.com/snowdd1/homebridge-knx
+ * https://bitbucket.org/ekarak/node-red-contrib-knxjs
 
 ## eibd documentation
 

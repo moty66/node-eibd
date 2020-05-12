@@ -1,6 +1,6 @@
 {
   "name": "eibd",
-  "version": "0.3.4",
+  "version": "0.5.0",
   "description": "node eibd client",
   "main": "./index",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "https://github.com/andreek/node-eibd"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=10.19.0"
   },
   "bin": {
     "groupread": "./bin/groupread",
@@ -18,27 +18,41 @@
     "groupsend": "./bin/groupsend"
   },
   "devDependencies": {
-    "mocha": "*"
+    "mocha": "^7.1.1"
   },
   "author": "Andree Klattenhoff",
   "contributors": [
-        { "name": "Dries Verbrugge" }
-     ,  { "name": "Andreas Monitzer" }
-     ,  { "name": "Raoul" }
-     ,  { "name": "Marco Piraccini" }
-     ,  { "name": "stasee" }
+    {
+      "name": "Dries Verbrugge"
+    },
+    {
+      "name": "Andreas Monitzer"
+    },
+    {
+      "name": "Raoul"
+    },
+    {
+      "name": "Marco Piraccini"
+    },
+    {
+      "name": "stasee"
+    }
   ],
-  "scripts": { "test": "mocha -R list ./test" },
-  "licenses" : [
-      {   
-          "type" : "GPL"
-        , "url" : "http://github.com/andreek/node-eibd/LICENSE"
-      }
+  "scripts": {
+    "test": "mocha --exit -R list ./test"
+  },
+  "licenses": [
+    {
+      "type": "GPL",
+      "url": "http://github.com/andreek/node-eibd/LICENSE"
+    }
   ],
   "keywords": [
-        "knx", "eibd", "house automation"
+    "knx",
+    "eibd",
+    "house automation"
   ],
-  "bugs": { 
-        "url" : "http://github.com/andreek/node-eibd/issues" 
+  "bugs": {
+    "url": "http://github.com/andreek/node-eibd/issues"
   }
 }
